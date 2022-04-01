@@ -2,8 +2,6 @@ package com.skilldistillery.filmquery.entities;
 
 import java.util.List;
 import java.util.Objects;
-import com.skilldistillery.filmquery.database.DatabaseAccessor;
-import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 
 public class Film {
 	private int id;
@@ -17,7 +15,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
-	List<Actor> cast = getCast();
+	private List<Actor> actors;
 
 	public Film() {
 		super();
@@ -30,7 +28,6 @@ public class Film {
 		this.description = description;
 		this.releaseYear = releaseYear;
 		this.rating = rating;
-		setCast();
 	}
 
 	// TO STRING
@@ -154,11 +151,10 @@ public class Film {
 	}
 
 	public List<Actor> getCast() {
-		return cast;
+		return actors;
 	}
 
-	public void setCast() {
-		DatabaseAccessor db = new DatabaseAccessorObject();
-		cast = db.findActorsByFilmId(this.id);
+	public void setCast(List<Actor> cast) {
+		actors = cast;
 	}
 }

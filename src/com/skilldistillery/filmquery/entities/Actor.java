@@ -9,26 +9,25 @@ public class Actor {
 
 	public Actor() {
 	}
-	
+
 	public Actor(int id, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+
 	// TO STRING
 	@Override
 	public String toString() {
 		return "Actor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
-	}	
+	}
 
 	// EQUALS AND HASH CODE
 	@Override
 	public int hashCode() {
 		return Objects.hash(firstName, id, lastName);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -46,7 +45,7 @@ public class Actor {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -66,5 +65,5 @@ public class Actor {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 }
