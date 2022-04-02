@@ -61,7 +61,8 @@ public class FilmQueryApp {
 				case 1:
 					System.out.println("Enter a film ID:");
 					int filmId = input.nextInt();
-					System.out.println(filmId);
+					Film film = db.findFilmById(filmId);
+					System.out.println(film);
 					break;
 				case 2:
 					System.out.println("Enter a search keyword:");
