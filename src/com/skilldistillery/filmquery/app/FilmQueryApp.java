@@ -62,7 +62,6 @@ public class FilmQueryApp {
 					System.out.println("Enter a film ID:");
 					int filmId = input.nextInt();
 					Film film = db.findFilmById(filmId);
-					
 					if (film == null) {
 						System.out.println("No film found by id: " + filmId);
 					}
@@ -73,7 +72,15 @@ public class FilmQueryApp {
 				case 2:
 					System.out.println("Enter a search keyword:");
 					String searchTerm = input.next();
-					System.out.println(searchTerm);
+					List<Film> filmByKeyword = db.findFilmByKeyword(searchTerm);
+					if (filmByKeyword == null) {
+						System.out.println("No film found by keyword: " + searchTerm);
+					}
+					else {
+						for (Film filmByKey : filmByKeyword) {
+							System.out.println(filmByKey);
+						}
+					}
 					break;
 				case 3:
 					System.out.println("Thank you for visiting! Goodbye.\n");
