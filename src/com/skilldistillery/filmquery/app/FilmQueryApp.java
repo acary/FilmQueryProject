@@ -14,10 +14,10 @@ public class FilmQueryApp {
 
 	public static void main(String[] args) {
 		FilmQueryApp app = new FilmQueryApp();
-		app.test();
-		app.testActor();
-		app.testFilmActors();
-//      app.launch();
+//		app.test();
+//		app.testActor();
+//		app.testFilmActors();
+		app.launch();
 	}
 
 	private void test() {
@@ -46,7 +46,38 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
-
+		int selection = 0;
+		boolean patron = true;
+		
+		do {
+			System.out.println("\n*********** Welcome to the Virtual Cinema! ***********");
+			System.out.println("Please make a selection:\n");
+			System.out.println("1: Look up film by ID");
+			System.out.println("2: Look up film by search keyword");
+			System.out.println("3: Exit");
+			for(;;) {
+				selection = input.nextInt();
+				switch(selection) {
+				case 1:
+					System.out.println("Enter a film ID:");
+					int filmId = input.nextInt();
+					System.out.println(filmId);
+					break;
+				case 2:
+					System.out.println("Enter a search keyword:");
+					String searchTerm = input.next();
+					System.out.println(searchTerm);
+					break;
+				case 3:
+					System.out.println("Thank you for visiting! Goodbye.\n");
+					System.exit(0);
+				default:
+					System.out.println("Please make a valid selection.");
+				}
+				break;
+			}
+		} while (patron);
+		
 	}
 
 }
