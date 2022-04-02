@@ -17,6 +17,30 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	private String user = "student";
 	private String pass = "student";
+	
+	public String findLangageByLanguageId(int langId) {
+		String result = null;
+		try {
+			String sqltxt;
+			sqltxt = "SELECT l.name"
+					+ " FROM film f"
+					+ " JOIN language l ON l.id = ?";
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			PreparedStatement s = conn.prepareStatement(sqltxt);
+			s.setInt(1, langId);
+			ResultSet rs = s.executeQuery();
+			while (rs.next()) {
+				result = rs.getString(1);
+			}
+			rs.close();
+			s.close();
+			conn.close();
+		}
+		catch (SQLException e) {
+			System.err.println(e);
+		}
+		return result;
+	}
 
 	public List<Actor> findActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList<>();
@@ -77,6 +101,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setTitle(rs.getString("title"));
 					film.setDescription(rs.getString("description"));
 					film.setReleaseYear(rs.getInt("release_year"));
+					film.setLanguage(findLangageByLanguageId(rs.getInt("language_id")));
 					film.setLanguageId(rs.getString("language_id"));
 					film.setRentalDuration(rs.getInt("rental_duration"));
 					film.setRentalRate(rs.getInt("rental_rate"));
@@ -93,9 +118,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return film;
 	}
-	
+
 	@Override
-	public List<Film> findFilmByKeyword (String keyword) {
+	public List<Film> findFilmByKeyword(String keyword) {
 		List<Film> films = new ArrayList<>();
 		Film film = null;
 		String sqltxt;
@@ -112,6 +137,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setTitle(rs.getString("title"));
 					film.setDescription(rs.getString("description"));
 					film.setReleaseYear(rs.getInt("release_year"));
+					film.setLanguage(findLangageByLanguageId(rs.getInt("language_id")));
 					film.setLanguageId(rs.getString("language_id"));
 					film.setRentalDuration(rs.getInt("rental_duration"));
 					film.setRentalRate(rs.getInt("rental_rate"));

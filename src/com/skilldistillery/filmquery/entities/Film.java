@@ -9,6 +9,7 @@ public class Film {
 	private String description;
 	private int releaseYear;
 	private String languageId;
+	private String language;
 	private int rentalDuration;
 	private double rentalRate;
 	private int length;
@@ -34,7 +35,7 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", releaseYear=" + releaseYear + ", length=" + length
-				+ ", rating=" + rating + ", cast=" + getCast() + "]";
+				+ ", rating=" + rating + ", language=" + language + ", cast=" + getCast() + "]";
 	}
 
 	// HASH CODE AND EQUALS
@@ -156,5 +157,13 @@ public class Film {
 
 	public void setCast(List<Actor> cast) {
 		actors = cast;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }
