@@ -7,6 +7,7 @@ public class Film {
 	private int id;
 	private String title;
 	private String description;
+	private String category;
 	private int releaseYear;
 	private String languageId;
 	private String language;
@@ -34,8 +35,9 @@ public class Film {
 	// TO STRING
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", releaseYear=" + releaseYear + ", length=" + length
-				+ ", rating=" + rating + ", language=" + language + ", cast=" + getCast() + "]";
+		return "{ id: " + id + ", title: " + title + ", category: " + category + ", releaseYear: " + releaseYear
+				+ ", length: " + length + ", rating: " + rating + ", language: " + language + ", actors: " + getActors()
+				+ "}";
 	}
 
 	// HASH CODE AND EQUALS
@@ -151,11 +153,11 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 
-	public List<Actor> getCast() {
+	public List<Actor> getActors() {
 		return actors;
 	}
 
-	public void setCast(List<Actor> cast) {
+	public void setActors(List<Actor> cast) {
 		actors = cast;
 	}
 
@@ -165,5 +167,13 @@ public class Film {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

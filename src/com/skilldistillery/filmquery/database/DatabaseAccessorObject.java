@@ -17,14 +17,33 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	private String user = "student";
 	private String pass = "student";
-	
+
+	public String findFilmCategory(int filmId) {
+		String category = null;
+		String sqltxt;
+		sqltxt = "SELECT c.name" + " FROM film_category fc" + " JOIN category c ON fc.category_id = c.id"
+				+ " WHERE fc.film_id = ?";
+
+		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement stmt = conn.prepareStatement(sqltxt)) {
+			stmt.setInt(1, filmId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					category = rs.getString(1);
+				}
+				return category;
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return category;
+	}
+
 	public String findLangageByLanguageId(int langId) {
 		String result = null;
 		try {
 			String sqltxt;
-			sqltxt = "SELECT l.name"
-					+ " FROM film f"
-					+ " JOIN language l ON l.id = ?";
+			sqltxt = "SELECT l.name" + " FROM film f" + " JOIN language l ON l.id = ?";
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			PreparedStatement s = conn.prepareStatement(sqltxt);
 			s.setInt(1, langId);
@@ -35,8 +54,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			rs.close();
 			s.close();
 			conn.close();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.err.println(e);
 		}
 		return result;
@@ -109,7 +127,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setReplacementCost(rs.getInt("replacement_cost"));
 					film.setRating(rs.getString("rating"));
 					film.setSpecialFeatures(rs.getString("special_features"));
-					film.setCast(findActorsByFilmId(rs.getInt("id")));
+					film.setActors(findActorsByFilmId(rs.getInt("id")));
+					film.setCategory(findFilmCategory(rs.getInt("id")));
 				}
 				return film;
 			}
@@ -145,7 +164,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setReplacementCost(rs.getInt("replacement_cost"));
 					film.setRating(rs.getString("rating"));
 					film.setSpecialFeatures(rs.getString("special_features"));
-					film.setCast(findActorsByFilmId(rs.getInt("id")));
+					film.setActors(findActorsByFilmId(rs.getInt("id")));
+					film.setCategory(findFilmCategory(rs.getInt("id")));
 					films.add(film);
 				}
 				return films;

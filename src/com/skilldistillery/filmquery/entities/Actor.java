@@ -20,7 +20,7 @@ public class Actor {
 	// TO STRING
 	@Override
 	public String toString() {
-		return "Actor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "{ id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + "}";
 	}
 
 	// EQUALS AND HASH CODE
