@@ -67,6 +67,22 @@ public class FilmQueryApp {
 					}
 					else {
 						System.out.println(film);
+						System.out.println("\nOptions:");
+						System.out.println("1: Return to the main menu");
+						System.out.println("2: View all film details");
+						int subSelection = input.nextInt();
+						switch (subSelection) {
+						case 1:
+							break;
+						case 2:
+							System.out.println("\nViewing all details for film: " + filmId + "\n");
+							Film filmDetails = db.findFilmDetailsById(filmId);
+							System.out.println(filmDetails.details());
+							break;
+						default:
+							System.out.println("Please make a valid selection.");
+							break;
+						}
 					}
 					break;
 				case 2:

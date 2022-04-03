@@ -39,6 +39,25 @@ public class Film {
 				+ ", length: " + length + ", rating: " + rating + ", language: " + language + ", actors: " + getActors()
 				+ "}";
 	}
+	
+	public String details() {
+		return "id: " + id + "\n" +
+				"title: " + title + "\n" +
+				"description: " + description + "\n" +
+				"releaseYear: " + releaseYear + "\n" +
+				"length: " + length + "\n" +
+				"rating: " + rating + "\n" +
+				"language: " + language + "\n" +
+				"rentalDuration: " + rentalDuration + "\n" +
+				"rentalRate: " + rentalRate + "\n" +
+				"length: " + length + "\n" +
+				"replacementCost: " + replacementCost + "\n" +
+				"rating: " + rating + "\n" +
+				"specialFeatures: " + specialFeatures + "\n" +
+				"actors: " + getActors() + "\n" +
+				"category: " + category + "\n" +
+				"";
+	}
 
 	// HASH CODE AND EQUALS
 	@Override
