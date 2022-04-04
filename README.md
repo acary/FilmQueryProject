@@ -4,6 +4,11 @@
 
 This application is a film query application that takes input from a user and retrieves record information related to the film in the database.
 
+### Functionality:
+- Look up film by ID or search keyword
+- View film record and greater details
+- Exit application
+
 ##### Running the program:
 ```
 - Import project into Eclipse
@@ -21,7 +26,9 @@ This application is a film query application that takes input from a user and re
 
 ### Lessons Learned
 
-- TBD
+- Structured Query Language (SQL) queries (including joins and binding variables) provide robust interactivity embedded in a Java application.
+- Coding to the interface which defines the database access methods helps separate concerns related to implementation.
+- Static code block is helpful to load the JDBC driver in a try-catch block
 
 ### Technologies Used
 
