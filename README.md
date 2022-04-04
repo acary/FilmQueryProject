@@ -29,6 +29,7 @@ This application is a film query application that takes input from a user and re
 - Structured Query Language (SQL) queries (including joins and binding variables) provide robust interactivity embedded in a Java application.
 - Coding to the interface which defines the database access methods helps separate concerns related to implementation.
 - Static code block is helpful to load the JDBC driver in a try-catch block
+- Control flow techniques help handle user input errors, i.e. type mismatch.
 
 ### Technologies Used
 
