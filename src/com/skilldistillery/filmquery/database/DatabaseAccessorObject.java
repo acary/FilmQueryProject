@@ -34,6 +34,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			if (updateCount == 1) {
 				conn.commit(); // COMMIT TRANSACTION
 			}
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -48,7 +50,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return true;
 	}
-
+	
 	/***** DELETE FILM *****/
 	public boolean deleteFilm(Film film) {
 		Connection conn = null;
@@ -61,6 +63,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, film.getId());
 			int updateCount = stmt.executeUpdate();
 			conn.commit(); // COMMIT TRANSACTION
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -74,7 +78,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return true;
 	}
-
+	
 	/***** CREATE FILM *****/
 	public Film createFilm(Film film) {
 		Connection conn = null;
@@ -93,10 +97,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setId(newFilmId);
 					System.out.println("Added new film with ID: " + film.getId());
 				}
+				keys.close();
 			} else {
 				film = null;
 			}
 			conn.commit(); // COMMIT TRANSACTION
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -139,10 +146,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 						}
 					}
 				}
+				keys.close();
 			} else {
 				actor = null;
 			}
 			conn.commit(); // COMMIT TRANSACTION
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -190,6 +200,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					updateCount = stmt.executeUpdate();
 				}
 				conn.commit(); // COMMIT TRANSACTION
+				stmt.close();
+				conn.close();
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
