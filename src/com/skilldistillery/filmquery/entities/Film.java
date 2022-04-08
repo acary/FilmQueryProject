@@ -35,16 +35,16 @@ public class Film {
 	// TO STRING
 	@Override
 	public String toString() {
-		return "id: " + id + 
-				", title: " + title + 
-				", releaseYear: " + releaseYear + 
-				", rating: " + rating + 
+		return "id: " + id +
+				", title: " + title +
+				", releaseYear: " + releaseYear +
+				", rating: " + rating +
 				", description: " + description +
-				", language: " + language + 
+				", language: " + language +
 				", actors: " + getActors()
 				;
 	}
-	
+
 	public String details() {
 		return "id: " + id + "\n" +
 				"title: " + title + "\n" +

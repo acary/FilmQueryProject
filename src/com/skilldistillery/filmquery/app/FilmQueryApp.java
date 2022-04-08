@@ -39,7 +39,7 @@ public class FilmQueryApp {
 
 	private void launch() {
 		Scanner input = new Scanner(System.in);
-
+		input.useDelimiter(System.lineSeparator());
 		startUserInterface(input);
 
 		input.close();
@@ -48,13 +48,14 @@ public class FilmQueryApp {
 	private void startUserInterface(Scanner input) {
 		int selection = 0;
 		boolean patron = true;
-		
+
 		do {
 			System.out.println("\n*********** Welcome to the Virtual Cinema! ***********");
 			System.out.println("Please make a selection:\n");
 			System.out.println("1: Look up film by ID");
 			System.out.println("2: Look up film by search keyword");
-			System.out.println("3: Exit");
+			System.out.println("3: Add new film");
+			System.out.println("4: Exit");
 			for(;;) {
 				try {
 					selection = input.nextInt();
@@ -71,6 +72,8 @@ public class FilmQueryApp {
 							System.out.println("\nOptions:");
 							System.out.println("1: Return to the main menu");
 							System.out.println("2: View all film details");
+							System.out.println("3: Delete film");
+							System.out.println("4: Update film");
 							int subSelection = input.nextInt();
 							switch (subSelection) {
 							case 1:
@@ -79,6 +82,18 @@ public class FilmQueryApp {
 								System.out.println("\nViewing all details for film: " + filmId + "\n");
 								Film filmDetails = db.findFilmDetailsById(filmId);
 								System.out.println(filmDetails.details());
+								break;
+							case 3:
+								System.out.println("\nDeleting film: " + filmId + "\n");
+								System.out.println("Film deleted: " + db.deleteFilm(film));
+								break;
+							case 4:
+								System.out.println("\nUpdating film: " + filmId);
+								System.out.println("\nEnter new title:");
+								String newTitle = input.next();
+								Film updatedFilm = film;
+								updatedFilm.setTitle(newTitle);
+								System.out.println("Film updated: " + db.updateFilm(updatedFilm));
 								break;
 							default:
 								System.out.println("Please make a valid selection.");
@@ -100,6 +115,19 @@ public class FilmQueryApp {
 						}
 						break;
 					case 3:
+						System.out.println("Enter the new film's title:");
+						String filmTitle = input.next();
+						Film newFilm = new Film();
+						newFilm.setTitle(filmTitle);
+						newFilm = db.createFilm(newFilm);
+						if (newFilm == null) {
+							System.out.println("No film added: " + newFilm.getTitle());
+						}
+						else {
+							System.out.println(newFilm);
+						}
+						break;
+					case 4:
 						System.out.println("Thank you for visiting! Goodbye.\n");
 						System.exit(0);
 					default:
@@ -108,13 +136,12 @@ public class FilmQueryApp {
 					break;
 				}
 				catch(Exception e) {
+					System.out.println(e);
 					System.out.println("Please provide valid input. Restart application and try again.");
 					patron = false;
 					break;
 				}
 			}
 		} while (patron);
-		
 	}
-
 }
